@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kuis Spesial 💡</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen font-sans">
+    <div class="max-w-3xl mx-auto p-6">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 mb-6">
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">🎯 Kuis Spesial Untukmu</h1>
+            <p class="text-center text-gray-600 mb-6">Jawab pertanyaan-pertanyaan seru ini dan lihat hasilmu!</p>
+
+            <div id="quizContainer">
+                <!-- Soal akan muncul di sini -->
+            </div>
+
+            <div id="result" class="mt-6 text-center text-xl font-semibold text-gray-800 hidden">
+                Skormu: <span id="scoreValue">0</span>/5 🎉
+            </div>
+
+            <div class="mt-6 text-center space-x-2" id="quiz-buttons">
+                <button onclick="startQuiz()" class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                    🔁 Mulai Ulang
+                </button>
+                <button onclick="window.location.href='index.html'" class="bg-gradient-to-r from-gray-400 to-gray-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                    🏠 Beranda
+                </button>
+                <button id="miniGamesBtn" onclick="window.location.href='mini-games.html'" class="hidden bg-gradient-to-r from-green-400 to-emerald-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                    🎮 Mini Games
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Siapa yang dikenal sebagai penemu mesin cetak?",
+                options: ["Johannes Gutenberg", "Leonardo Da Vinci", "Asep Paralon", "Isaac Newton"],
+                answer: "Johannes Gutenberg"
+            },
+            {
+                question: "Perang Dunia Ke 2 Dimulai PAda Tahun Berapa?",
+                options: ["1914", "1939", "1945", "1933"],
+                answer: "1939"
+            },
+            {
+                question: "Kerajaan Majapahit mencapai puncak kejayaannya di bawah pemerintahan siapa?",
+                options: ["Hayam Wuruk", "Gajah Mada", "Raden Wijaya", "Ken Arok"],
+                answer: "Hayam Wuruk"
+            },
+            {
+                question: "Apa nama perjanjian yang mengakhiri Perang Dunia I?",
+                options: ["Perjanjian Versailles", "Perjanjian Tordesillas", "Perjanjian Westphalia", "Perjanjian Utrecht"],
+                answer: "Perjanjian Versailles"
+            },
+            {
+                question: "Siapa presiden pertama Republik Indonesia?",
+                options: ["Sukarno", "Suharto", "B.J. Habibie", "Megawati Soekarnoputri"],
+                answer: "Sukarno"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function startQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('result').classList.add('hidden');
+            document.getElementById('miniGamesBtn').classList.add('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const quizContainer = document.getElementById('quizContainer');
+            if (currentQuestion >= quizData.length) {
+                showResult();
+                return;
+            }
+
+            const q = quizData[currentQuestion];
+            let html = `
+                <div class="bg-pink-50 p-4 rounded-xl shadow card-hover">
+                    <h2 class="text-lg font-bold mb-4 text-gray-800">${currentQuestion + 1}. ${q.question}</h2>
+                    <div class="space-y-3">
+            `;
+            q.options.forEach(opt => {
+                html += `
+                    <button onclick="selectAnswer('${opt}')" 
+                        class="w-full bg-white border border-pink-300 text-pink-700 font-semibold py-2 px-4 rounded-lg hover:bg-pink-100 transition-all">
+                        ${opt}
+                    </button>
+                `;
+            });
+            html += `
+                    </div>
+                </div>
+            `;
+
+            quizContainer.innerHTML = html;
+        }
+
+        function selectAnswer(selected) {
+            const correct = quizData[currentQuestion].answer;
+            if (selected === correct) {
+                score++;
+            }
+            currentQuestion++;
+            loadQuestion();
+        }
+
+        function showResult() {
+            document.getElementById('quizContainer').innerHTML = '';
+            document.getElementById('scoreValue').textContent = score;
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('miniGamesBtn').classList.remove('hidden'); // Munculkan tombol mini games
+
+            // Redirect ke halaman penutupan setelah 3 detik dengan kirim skor
+            setTimeout(() => {
+                window.location.href = `thankyou.html?score=${score}`;
+            }, 3000);
+        }
+
+        // Jalankan pertama kali
+        startQuiz();
+    </script>
+</body>
+</html>
