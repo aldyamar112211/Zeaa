@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Utama - Untukmu ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .love-bg {
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+        }
+    </style>
+</head>
+<body class="gradient-bg font-sans min-h-screen">
+    <!-- Header -->
+    <div class="p-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-4 mb-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-2xl font-bold text-white">Program Spesial 💕</h1>
+                        <p class="text-white/80 text-sm">Dibuat dengan cinta untukmu</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-white/90 text-sm" id="currentTime"></div>
+                        <div class="text-white/70 text-xs" id="currentDate"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto p-4">
+        <!-- Welcome Section -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8 mb-6">
+            <div class="text-center mb-8">
+                <div class="text-6xl mb-4 float-animation">🌟</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Selamat Datang di Program Istimewa!</h2>
+                <p class="text-gray-600">Berbagai fitur menarik yang dibuat khusus untukmu</p>
+            </div>
+        </div>
+
+        <!-- Feature Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Generator Compliment -->
+            <div class="bg-white rounded-2xl shadow-xl p-6 card-hover">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-3">💝</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Generator Pujian</h3>
+                    <p class="text-gray-600 text-sm mb-4">Dapatkan pujian manis setiap hari</p>
+                </div>
+                <div class="bg-pink-50 rounded-xl p-4 mb-4 min-h-20">
+                    <p class="text-gray-700 text-center italic" id="complimentText">Klik tombol untuk mendapat pujian!</p>
+                </div>
+                <button onclick="generateCompliment()" 
+                        class="w-full bg-gradient-to-r from-pink-400 to-pink-600 text-white p-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                    ✨ Beri Aku Pujian
+                </button>
+            </div>
+
+            <!-- Love Calculator -->
+            <div class="bg-white rounded-2xl shadow-xl p-6 card-hover">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-3">💕</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Love Calculator</h3>
+                    <p class="text-gray-600 text-sm mb-4">Hitung tingkat kecocokan kita</p>
+                </div>
+                <div class="space-y-3 mb-4">
+                    <input type="text" id="name1" placeholder="Nama kamu" 
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-400">
+                    <input type="text" id="name2" placeholder="Nama dia" 
+                           class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-pink-400">
+                </div>
+                <div class="bg-red-50 rounded-xl p-4 mb-4 min-h-16 text-center">
+                    <div id="loveResult" class="text-gray-700">💝 Masukkan nama kalian</div>
+                </div>
+                <button onclick="calculateLove()" 
+                        class="w-full bg-gradient-to-r from-red-400 to-pink-500 text-white p-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                    💖 Hitung Kecocokan
+                </button>
+            </div>
+
+            <!-- Mood Tracker -->
+            <div class="bg-white rounded-2xl shadow-xl p-6 card-hover">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-3">😊</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Mood Tracker</h3>
+                    <p class="text-gray-600 text-sm mb-4">Bagaimana perasaanmu hari ini?</p>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                    <button onclick="setMood('😢', 'Sedih')" class="p-3 bg-blue-100 rounded-lg hover:bg-blue-200 transition-colors">
+                        <div class="text-2xl">😢</div>
+                        <div class="text-xs">Sedih</div>
+                    </button>
+                    <button onclick="setMood('😊', 'Senang')" class="p-3 bg-yellow-100 rounded-lg hover:bg-yellow-200 transition-colors">
+                        <div class="text-2xl">😊</div>
+                        <div class="text-xs">Senang</div>
+                    </button>
+                    <button onclick="setMood('😍', 'Bahagia')" class="p-3 bg-pink-100 rounded-lg hover:bg-pink-200 transition-colors">
+                        <div class="text-2xl">😍</div>
+                        <div class="text-xs">Bahagia</div>
+                    </button>
+                </div>
+                <div class="bg-purple-50 rounded-xl p-4 text-center">
+                    <div id="currentMood" class="text-gray-700">Pilih mood kamu!</div>
+                </div>
+            </div>
+
+            <!-- Random Question -->
+            <div class="bg-white rounded-2xl shadow-xl p-6 card-hover">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-3">❓</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Pertanyaan Random</h3>
+                    <p class="text-gray-600 text-sm mb-4">Pertanyaan untuk memulai obrolan</p>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-4 mb-4 min-h-24">
+                    <p class="text-gray-700 text-center" id="randomQuestion">Klik untuk pertanyaan menarik!</p>
+                </div>
+                <button onclick="generateQuestion()" 
+                        class="w-full bg-gradient-to-r from-blue-400 to-blue-600 text-white p-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                    🎲 Pertanyaan Baru
+                </button>
+            </div>
+
+            <!-- Memory Game -->
+            <div class="bg-white rounded-2xl shadow-xl p-6 card-hover">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-3">🧠</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Memory Game</h3>
+                    <p class="text-gray-600 text-sm mb-4">Tes daya ingat dengan emoji</p>
+                </div>
+                <div class="grid grid-cols-4 gap-2 mb-4" id="memoryGrid">
+                    <!-- Memory cards will be inserted here -->
+                </div>
+                <div class="text-center mb-3">
+                    <div class="text-sm text-gray-600">Skor: <span id="memoryScore" class="font-bold">0</span></div>
+                </div>
+                <button onclick="startMemoryGame()" 
+                        class="w-full bg-gradient-to-r from-purple-400 to-purple-600 text-white p-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                    🎮 Mulai Game
+                </button>
+            </div>
+
+            <!-- Daily Affirmation -->
+            <div class="bg-white rounded-2xl shadow-xl p-6 card-hover">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-3">🌈</div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Afirmasi Harian</h3>
+                    <p class="text-gray-600 text-sm mb-4">Kata-kata motivasi untuk hari ini</p>
+                </div>
+                <div class="love-bg rounded-xl p-4 mb-4 min-h-20">
+                    <p class="text-gray-800 text-center font-medium" id="affirmationText">Kamu luar biasa hari ini! ✨</p>
+                </div>
+                <button onclick="generateAffirmation()" 
+                        class="w-full bg-gradient-to-r from-orange-400 to-pink-500 text-white p-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                    🌟 Afirmasi Baru
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="mt-8 text-center">
+            <div class="bg-white rounded-2xl shadow-xl p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Jelajahi Lebih Lanjut</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <button onclick="window.location.href='index.html'" 
+                            class="bg-gradient-to-r from-gray-400 to-gray-600 text-white p-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                        🏠 Kembali ke Beranda
+                    </button>
+                    <button onclick="window.location.href='quiz.html'" 
+                            class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white p-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                        🎯 Main Kuis
+                    </button>
+                    <button onclick="window.location.href='games.html'" 
+                            class="bg-gradient-to-r from-indigo-400 to-purple-600 text-white p-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                        🎲 Mini Games
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update time and date
+        function updateDateTime() {
+            const now = new Date();
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            
+            document.getElementById('currentTime').textContent = now.toLocaleTimeString('id-ID', timeOptions);
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('id-ID', dateOptions);
+        }
+        
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+
+        // Compliment Generator
+        const compliments = [
+            "Kamu cantik banget hari ini! 😍",
+            "Senyummu bisa mencerahkan hari siapa aja ✨",
+            "Kamu selalu berhasil bikin aku tersenyum 😊",
+            "Kepribadianmu yang unik itu yang bikin kamu istimewa 💕",
+            "Kamu punya aura yang positif banget! 🌟",
+            "Cara kamu tertawa itu manis banget 😄",
+            "Kamu itu inspirasi buat orang-orang di sekitarmu 💪",
+            "Hatimu yang baik selalu keliatan dari sikapmu 💝",
+            "Kamu punya bakat tersembunyi yang amazing! 🎨",
+            "Energi positifmu itu menular ke semua orang 🌈"
+        ];
+
+        function generateCompliment() {
+            const randomCompliment = compliments[Math.floor(Math.random() * compliments.length)];
+            const complimentEl = document.getElementById('complimentText');
+            
+            complimentEl.style.opacity = '0';
+            setTimeout(() => {
+                complimentEl.textContent = randomCompliment;
+                complimentEl.style.transition = 'opacity 0.5s ease';
+                complimentEl.style.opacity = '1';
+            }, 200);
+        }
+
+        // Love Calculator
+        function calculateLove() {
+            const name1 = document.getElementById('name1').value.trim();
+            const name2 = document.getElementById('name2').value.trim();
+            
+            if (!name1 || !name2) {
+                document.getElementById('loveResult').textContent = '💔 Isi nama kalian dulu dong!';
+                return;
+            }
+            
+            const combined = (name1 + name2).toLowerCase();
+            let score = 0;
+            
+            for (let i = 0; i < combined.length; i++) {
+                score += combined.charCodeAt(i);
+            }
+            
+            const lovePercent = (score % 100) + 1;
+            const resultEl = document.getElementById('loveResult');
+            
+            let message = '';
+            if (lovePercent >= 80) {
+                message = `💕 ${lovePercent}% - Perfect Match! Kalian soulmate banget!`;
+            } else if (lovePercent >= 60) {
+                message = `💖 ${lovePercent}% - Great Match! Hubungan yang harmonis!`;
+            } else if (lovePercent >= 40) {
+                message = `💛 ${lovePercent}% - Good Match! Ada chemistry yang bagus!`;
+            } else {
+                message = `💙 ${lovePercent}% - Friendship Goals! Teman yang baik!`;
+            }
+            
+            resultEl.textContent = message;
+        }
+
+        // Mood Tracker
+        function setMood(emoji, mood) {
+            const currentMoodEl = document.getElementById('currentMood');
+            const responses = {
+                'Sedih': ['Semoga harimu segera membaik ya 🤗', 'Aku di sini buat kamu kok 💙', 'Bad days make good days better 🌈'],
+                'Senang': ['Seneng banget lihat kamu happy! 😊', 'Keep that positive energy! ✨', 'Hari yang indah ya! 🌞'],
+                'Bahagia': ['Yay! Kamu lagi bahagia banget! 🎉', 'Semoga kebahagiaanmu terus berlanjut! 💕', 'Happiness looks good on you! 😍']
+            };
+            
+            const randomResponse = responses[mood][Math.floor(Math.random() * responses[mood].length)];
+            currentMoodEl.innerHTML = `${emoji} ${mood}<br><small class="text-gray-500">${randomResponse}</small>`;
+        }
+
+        // Random Question Generator
+        const questions = [
+            "Kalau bisa punya superpower, kamu pilih apa?",
+            "Tempat impian yang pengen banget kamu kunjungi?",
+            "Makanan comfort food favorit kamu apa?",
+            "Lagu yang selalu bikin kamu semangat?",
+            "Kalau jadi hewan, kamu mau jadi apa?",
+            "Hobi baru yang pengen kamu coba?",
+            "Warna yang paling merepresentasikan kepribadian kamu?",
+            "Film genre favorit kamu apa?",
+            "Kalau bisa ketemu tokoh sejarah, siapa yang kamu pilih?",
+            "Aktivitas yang bikin kamu paling rileks?"
+        ];
+
+        function generateQuestion() {
+            const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+            const questionEl = document.getElementById('randomQuestion');
+            
+            questionEl.style.opacity = '0';
+            setTimeout(() => {
+                questionEl.textContent = randomQuestion;
+                questionEl.style.transition = 'opacity 0.5s ease';
+                questionEl.style.opacity = '1';
+            }, 200);
+        }
+
+        // Memory Game
+        const memoryEmojis = ['🌸', '🦋', '🌟', '💝', '🎀', '🌈', '🍓', '🎵'];
+        let memoryCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let score = 0;
+
+        function startMemoryGame() {
+            matchedPairs = 0;
+            score = 0;
+            flippedCards = [];
+            document.getElementById('memoryScore').textContent = score;
+            
+            // Create pairs
+            memoryCards = [...memoryEmojis, ...memoryEmojis].sort(() => Math.random() - 0.5);
+            
+            const grid = document.getElementById('memoryGrid');
+            grid.innerHTML = '';
+            
+            memoryCards.forEach((emoji, index) => {
+                const card = document.createElement('button');
+                card.className = 'aspect-square bg-gradient-to-r from-purple-200 to-pink-200 rounded-lg hover:from-purple-300 hover:to-pink-300 transition-all text-2xl';
+                card.textContent = '?';
+                card.onclick = () => flipCard(index, card, emoji);
+                grid.appendChild(card);
+            });
+        }
+
+        function flipCard(index, cardEl, emoji) {
+            if (flippedCards.length >= 2 || cardEl.textContent !== '?') return;
+            
+            cardEl.textContent = emoji;
+            cardEl.className = 'aspect-square bg-gradient-to-r from-yellow-200 to-orange-200 rounded-lg text-2xl';
+            flippedCards.push({index, cardEl, emoji});
+            
+            if (flippedCards.length === 2) {
+                setTimeout(() => {
+                    if (flippedCards[0].emoji === flippedCards[1].emoji) {
+                        // Match found
+                        flippedCards.forEach(card => {
+                            card.cardEl.className = 'aspect-square bg-gradient-to-r from-green-200 to-green-400 rounded-lg text-2xl';
+                        });
+                        matchedPairs++;
+                        score += 10;
+                        document.getElementById('memoryScore').textContent = score;
+                        
+                        if (matchedPairs === memoryEmojis.length) {
+                            setTimeout(() => alert('🎉 Selamat! Kamu berhasil menyelesaikan game!'), 500);
+                        }
+                    } else {
+                        // No match
+                        flippedCards.forEach(card => {
+                            card.cardEl.textContent = '?';
+                            card.cardEl.className = 'aspect-square bg-gradient-to-r from-purple-200 to-pink-200 rounded-lg hover:from-purple-300 hover:to-pink-300 transition-all text-2xl';
+                        });
+                    }
+                    flippedCards = [];
+                }, 1000);
+            }
+        }
+
+        // Daily Affirmation
+        const affirmations = [
+            "Kamu berharga dan dicintai apa adanya ✨",
+            "Setiap hari adalah kesempatan baru untuk bersinar 🌟",
+            "Kekuatanmu lebih besar dari tantangan apapun 💪",
+            "Kamu layak mendapatkan kebahagiaan 💕",
+            "Percaya pada dirimu, kamu amazing! 🌈",
+            "Hari ini adalah hari yang indah untukmu 🌸",
+            "Kamu punya segala yang dibutuhkan untuk sukses 🎯",
+            "Energi positifmu menginspirasi orang lain 🔥",
+            "Kamu unik dan istimewa dengan caramu sendiri 💝",
+            "Masa depan cerah menantimu! 🌅"
+        ];
+
+        function generateAffirmation() {
+            const randomAffirmation = affirmations[Math.floor(Math.random() * affirmations.length)];
+            const affirmationEl = document.getElementById('affirmationText');
+            
+            affirmationEl.style.opacity = '0';
+            setTimeout(() => {
+                affirmationEl.textContent = randomAffirmation;
+                affirmationEl.style.transition = 'opacity 0.5s ease';
+                affirmationEl.style.opacity = '1';
+            }, 200);
+        }
+
+        // Initialize
+        generateCompliment();
+        generateAffirmation();
+    </script>
+</body>
+</html>

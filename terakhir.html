@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Terima Kasih!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+  body, html {
+    margin: 0; padding: 0; height: 100%;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .container {
+    max-width: 600px;
+    padding: 40px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+    position: relative;
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: 4px;
+    animation: fadeInDown 1s ease forwards;
+  }
+
+  .heart {
+    color: #ff3860;
+    animation: beat 1.5s infinite;
+  }
+
+  #message {
+    font-size: 1.3rem;
+    min-height: 70px;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fadeInUp 1s forwards;
+  }
+
+  button {
+    padding: 14px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #ff3860, #ff6b81);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255, 56, 96, 0.6);
+    transition: all 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    animation: fadeInButton 1s forwards;
+    animation-delay: 6s;
+  }
+
+  button:hover {
+    background: linear-gradient(90deg, #ff6b81, #ff3860);
+    box-shadow: 0 8px 25px rgba(255, 56, 96, 0.9);
+    transform: scale(1.05);
+  }
+
+  /* Animations */
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInButton {
+    to {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  /* Background floating particles */
+  .particle {
+    position: absolute;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    animation: floatUp 15s linear infinite;
+    pointer-events: none;
+  }
+
+  .particle1 {
+    width: 80px;
+    height: 80px;
+    left: 10%;
+    bottom: -80px;
+    animation-delay: 0s;
+  }
+
+  .particle2 {
+    width: 50px;
+    height: 50px;
+    left: 80%;
+    bottom: -50px;
+    animation-delay: 5s;
+  }
+
+  .particle3 {
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    bottom: -100px;
+    animation-delay: 10s;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(-110vh) scale(1.2);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="particle particle1"></div>
+  <div class="particle particle2"></div>
+  <div class="particle particle3"></div>
+
+  <div class="container">
+    <h1>Terima Kasih! <span class="heart">❤️</span></h1>
+    <div id="message">...</div>
+    <button id="btnHome" onclick="goHome()">🏠 Kembali ke Beranda</button>
+  </div>
+
+<script>
+  const messages = [
+    "Makasih Ya Zee Udah Nyobain Program Sederhana Yang Aku Buat Ini.",
+    "Semoga kamu seneng dan makin pinter gara gara ini wkkw.",
+    "Inget ya, setiap langkah kecil itu kemajuan yang besar.",
+    "Terus semangat buat kamu dan jangan lupa buat bersyukur hari ini."
+  ];
+
+  const messageEl = document.getElementById('message');
+  const btnHome = document.getElementById('btnHome');
+
+  let idx = 0;
+
+  function showNextMessage() {
+    if (idx < messages.length) {
+      messageEl.style.opacity = 0;
+      setTimeout(() => {
+        messageEl.textContent = messages[idx];
+        messageEl.style.opacity = 1;
+        idx++;
+        setTimeout(showNextMessage, 2500);
+      }, 500);
+    } else {
+      // Setelah semua pesan muncul, tampilkan tombol
+      btnHome.style.opacity = 1;
+      btnHome.style.pointerEvents = 'auto';
+    }
+  }
+
+  showNextMessage();
+
+  function goHome() {
+    window.location.href = 'tutup.html'; // Ganti dengan alamat beranda kamu
+  }
+</script>
+
+</body>
+</html>
